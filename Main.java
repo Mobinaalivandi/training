@@ -1,42 +1,52 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.HashSet;
 import java.util.Date;
+import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random ran = new Random();
-        BankAccount su = new BankAccount();
-        double amount = input.nextDouble();
         int x = input.nextInt();
-        amount = amount*x;
-        int[] id = new int[x];
-        for (int j = 0; j < x; ++j) {
-            id[j] = ran.nextInt(899999) + 1000000;
-        }
         BankAccount[] list = new BankAccount[x];
-        System.out.println("History :");
+        ArrayList<String> history = new ArrayList<>();
+        HashSet<Integer> usedIds = new HashSet<>();
         for (int i = 0; i < x; ++i) {
+            double amount = input.nextDouble();
+            input.nextLine();
             String ownerName = input.next();
-            Date m = new Date();
-            int c = i + 1;
-            System.out.println("Account number" + " " + c + " " + "is created");
-            System.out.printf("Date and time of creation : %tD , %tT ", m, m);
-            int accountNumber = ran.nextInt(899999) + 1000000;
-            for (int k = 0; k < i; ++k) {
-                if (accountNumber == id[k]) {
-                    accountNumber = ran.nextInt(899999) + 1000000;
-                }
+            int accountNumber = ran.nextInt(900000) + 100000;
+            while (usedIds.contains(accountNumber)) {
+                accountNumber = ran.nextInt(900000) + 100000;
             }
-            id[i] = accountNumber;
-            BankAccount s = new BankAccount(accountNumber, ownerName, 0);
+            usedIds.add(accountNumber);
+            BankAccount s = new BankAccount(accountNumber, ownerName, 0, amount);
             list[i] = s;
-            System.out.println("\n" + "Account's owner name : " + " " + list[i].getownerName());
-            System.out.println("Account's id:" + " " + list[i].getaccountNumber());
+            list[i].deposit(amount);
+            list[i].withdraw(amount);
+            list[i].printBalance();
+            Date date = new Date();
+            String datee = String.format("%tD  %tT ", date, date);
+            if ( amount > 0) {
+                history.add("User's name :" + ownerName + " " + "User's id : " + accountNumber + " " + "Time and date of creation:" + datee + " " + "The amount that was deposited/withdrawn:" + amount);
+            } else {
+                System.out.println("amount is not valid");
+            }
+            System.out.println(list[i].getownerName());
+            System.out.println(list[i].getaccountNumber());
         }
-        System.out.println("\n" + "number of created accounts" + " " + "is" + " " + x);
-        System.out.println("the overall amount that was diposited : " + amount);
+        for (int i = 0; i < history.size(); ++i) {
+            Date date = new Date();
+            System.out.println(history.get(i));
+        }
+        System.out.println("\n The number of created accounts" + " " + history.size());
     }
 }
+
+
+
+
+
 
 
 
