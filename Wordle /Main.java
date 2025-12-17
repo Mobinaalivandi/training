@@ -50,17 +50,15 @@ public class Main {
                         boolean find = false;
                         for (int j = 0; j < check.size(); ++j) {
                             if (att == check.get(j)) {
+                                fin = fin + 'w';
                                 find = true;
                                 check.remove(j);
                                 break;
                             }
-                        }
-                        if (find) {
-                            fin = fin + 'w';
-                        } else {
+                        } 
+                        if (!find)
                             fin = fin + 'x';
                         }
-                    }
                        if (guess.charAt(i) == 'o') {
                            fin = fin + 'o';
                        }
@@ -78,7 +76,7 @@ public class Main {
 
 
 
-}
+
 
 
 
