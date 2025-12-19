@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
@@ -41,47 +42,43 @@ public class Main {
                 }
             }
         }
+        ArrayList<Integer> map = new ArrayList<>();
         for (int i = 0; i < 2; ++i) {
             for (int j = 0; j < 2; ++j) {
-                for (int p = i + 1; p < 2; ++p) {
-                    for (int k = j + 1; k < 2; ++k) {
-                        if (sud[i][j] == sud[p][k]) {
-                            find = false;
-                        }
-                    }
+                if (map.contains(sud[i][j])) {
+                    find = false;
+                } else {
+                    map.add(sud[i][j]);
                 }
             }
         }
+        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < 2; ++i) {
             for (int j = 2; j < 4; ++j) {
-                for (int p = i + 1; p < 2; ++p) {
-                    for (int k = j + 1; k < 4; ++k) {
-                        if (sud[i][j] == sud[p][k]) {
-                            find = false;
-                        }
-                    }
+                if (list.contains(sud[i][j])) {
+                    find = false;
+                } else {
+                    list.add(sud[i][j]);
                 }
             }
         }
+        ArrayList<Integer> k = new ArrayList<>();
         for (int i = 2; i < 4; ++i) {
             for (int j = 0; j < 2; ++j) {
-                for (int p = i + 1; p < 4; ++p) {
-                    for (int k = j + 1; k < 2; ++k) {
-                        if (sud[i][j] == sud[p][k]) {
-                            find = false;
-                        }
-                    }
+                if (k.contains(sud[i][j])) {
+                    find = false;
+                } else {
+                    k.add(sud[i][j]);
                 }
             }
         }
+        ArrayList<Integer> ma = new ArrayList<>();
         for (int i = 2; i < 4; ++i) {
             for (int j = 2; j < 4; ++j) {
-                for (int p = i + 1; p < 4; ++p) {
-                    for (int k = j + 1; k < 4; ++k) {
-                        if (sud[i][j] == sud[p][k]) {
-                            find = false;
-                        }
-                    }
+                if (ma.contains(sud[i][j])) {
+                    find = false;
+                } else {
+                    ma.add(sud[i][j]);
                 }
             }
         }
